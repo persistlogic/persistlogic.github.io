@@ -1,0 +1,331 @@
+/* ========================================
+   PERSISTLOGIC UNIFIED DESIGN SYSTEM
+   Applied to ALL pages for consistency
+======================================== */
+
+/* 1. CSS VARIABLES */
+:root {
+  /* Brand Colors */
+  --primary: #0F3F3A;
+  --accent: #1FAE9A;
+  --accent-light: #6ED3C5;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --bg-white: #FFFFFF;
+  --bg-light: #F8FAFC;
+  --border: #E2E8F0;
+  --gradient: linear-gradient(135deg, #0F3F3A, #1FAE9A);
+  
+  /* Spacing (8px grid) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 80px;
+  --space-8: 96px;
+  
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+/* 2. GLOBAL RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-white);
+  overflow-x: hidden;
+}
+
+/* 3. TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); font-weight: 600; }
+h3 { font-size: var(--text-2xl); font-weight: 600; }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 4. CONTAINER SYSTEM */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.section-padding {
+  padding: var(--space-7) 0;
+}
+
+/* 5. HERO SECTIONS - UNIFIED ACROSS ALL PAGES */
+.page-header {
+  background: var(--bg-light);
+  padding: var(--space-7) 0;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.page-header p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 6. SECTION TITLE - CONSISTENT */
+.section-title {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.section-title h6 {
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(31, 174, 154, 0.1);
+  border-radius: var(--radius-full);
+}
+
+.section-title h2 {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.section-title h2 span {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-title p {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 7. BUTTON SYSTEM - UNIFIED */
+.btn {
+  padding: 12px 28px;
+  font-size: var(--text-base);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary,
+.btn-gradient {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.btn-primary:hover,
+.btn-gradient:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* 8. CARD SYSTEM - UNIFIED */
+.service-card,
+.portfolio-card,
+.blog-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover,
+.portfolio-card:hover,
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.service-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gradient);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  margin-bottom: var(--space-2);
+}
+
+.service-image,
+.portfolio-image img,
+.blog-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+}
+
+/* 9. GRID SYSTEM */
+.row {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .col-lg-4 {
+    grid-column: span 1;
+  }
+  
+  .col-lg-6 {
+    grid-column: span 2;
+  }
+}
+
+/* 10. RESPONSIVE */
+@media (max-width: 991px) {
+  :root {
+    --text-5xl: 36px;
+    --text-4xl: 28px;
+    --space-7: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --text-5xl: 32px;
+    --text-4xl: 24px;
+    --space-7: 40px;
+  }
+  
+  .page-header {
+    padding: var(--space-5) 0;
+  }
+}
+
+/* 11. REMOVE ALL GRADIENT BACKGROUNDS */
+.hero-section,
+.page-banner {
+  background: var(--bg-light) !important;
+  background-image: none !important;
+}
+
+/* Remove purple and multi-color gradients */
+[style*="linear-gradient"][style*="#667eea"],
+[style*="linear-gradient"][style*="#764ba2"],
+[style*="linear-gradient"][style*="#ff6b6b"] {
+  background: var(--bg-light) !important;
+}
+
+/* 12. CLEAN SECTION BACKGROUNDS */
+section {
+  background: var(--bg-white);
+}
+
+section:nth-child(even) {
+  background: var(--bg-light);
+}
+
+/* 13. CONSISTENT SPACING */
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+
+/* 14. TEXT UTILITIES */
+.text-center { text-align: center; }
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-accent { color: var(--accent) !important; }
