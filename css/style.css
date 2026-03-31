@@ -1,0 +1,468 @@
+:root {
+    --dark-blue: #004B6B;
+    --teal: #54C5C5;
+    --white: #ffffff;
+    --beige-bg: #f5f0e9;
+}
+
+body { font-family: 'Montserrat', sans-serif; color: #333; scroll-behavior: smooth; overflow-x: hidden; }
+
+/* Scroll Reveal */
+@keyframes reveal-animation { from { opacity: 0; transform: translateY(80px); } to { opacity: 1; transform: translateY(0); } }
+.css-reveal { view-timeline-name: --section; view-timeline-axis: block; animation-timeline: --section; animation-name: reveal-animation; animation-range: entry 10% cover 30%; animation-fill-mode: both; }
+
+/* Navbar */
+.nav-link { font-weight: 600; color: var(--dark-blue) !important; padding: 10px 15px !important; transition: 0.3s;}
+.nav-link:hover, .nav-link.active { color: var(--teal) !important; }
+.btn-main { background-color: var(--teal); border: none; padding: 10px 25px; border-radius: 5px; font-weight: 600; }
+
+/* Hero Slider */
+/* --- Updated CSS for Fast Slideshow --- */
+
+.slide { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-size: cover; 
+    background-position: center; 
+    opacity: 0; 
+    /* Total duration 18s kar di hai (6 images * 3s each) */
+    animation: sliderFade 18s infinite; 
+}
+
+/* Har slide ka gap 3-3 second ka kar diya gaya hai */
+.slide-1 { background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200'); animation-delay: 0s; }
+.slide-2 { background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200'); animation-delay: 3s; }
+.slide-3 { background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200'); animation-delay: 6s; }
+.slide-4 { background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200'); animation-delay: 9s; }
+.slide-5 { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200'); animation-delay: 12s; }
+.slide-6 { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200'); animation-delay: 15s; }
+
+/* Keyframes ko fast transition ke liye adjust kiya */
+@keyframes sliderFade { 
+    0% { opacity: 0; transform: scale(1); }
+    5% { opacity: 1; }              /* Jaldi fade in hoga */
+    17% { opacity: 1; }             /* Thodi der dikhega */
+    22% { opacity: 0; transform: scale(1.05); } /* Jaldi fade out ho jayega */
+    100% { opacity: 0; } 
+}
+/* Global UI */
+.section-title { color: var(--dark-blue); font-weight: 700; }
+.title-line { width: 60px; height: 3px; background: var(--teal); margin: 10px auto; }
+.service-card { padding: 30px; border-radius: 12px; background: white; transition: 0.3s; border: 1px solid #eee; text-align: center; }
+.service-card:hover { transform: translateY(-10px); border-color: var(--teal); box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important; }
+.service-card img { height: 180px; width: 100%; object-fit: cover; }
+.process-step span { width: 60px; height: 60px; background: var(--teal); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; border-radius: 50%; font-size: 24px; font-weight: bold; }
+.port-card { background: var(--teal); border-radius: 10px; overflow: hidden; position: relative; }
+.port-card img { height: 320px; width: 100%; object-fit: cover; transition: 0.4s; }
+.port-card:hover img { transform: scale(1.1); }
+.port-card h5 { color: white; padding: 15px; margin: 0; font-size: 1.1rem; text-align: center; }
+
+/* Testimonials & Blog
+.testimonial-card { transition: 0.3s; border-top: 4px solid var(--teal) !important; }
+.blog-card { border: 1px solid #eee; transition: 0.3s; }
+.blog-card img { height: 220px; object-fit: cover; }
+.blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); } */
+
+/* Contact Modern */
+.modern-curved-img { border-radius: 60px 0 60px 0; height: 420px; width: 100%; object-fit: cover; }
+.contact-modern-card { background-color: var(--beige-bg); border-radius: 30px; overflow: hidden; }
+.contact-title-modern { color: #000B33; font-size: 3rem; font-weight: 500; }
+.underline-input { border: none !important; border-bottom: 1px solid #444 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; padding: 5px 0 !important; }
+.underline-input:focus { border-bottom: 2px solid var(--teal) !important; }
+.btn-navy-pill { background-color: #000B33; color: white !important; border-radius: 50px; padding: 10px 35px; border: none; font-weight: 600; }
+.field-label { font-size: 0.8rem; color: #777; text-transform: uppercase; display: block; margin-bottom: 2px; }
+
+/* Footer & Icons */
+.bg-dark-blue { background-color: var(--dark-blue); }
+.brightness-0-invert { filter: brightness(0) invert(1); }
+.cta-banner { background: var(--teal); }
+.footer-links li a { color: rgba(255,255,255,0.6); text-decoration: none; display: block; margin-bottom: 8px; transition: 0.3s; }
+.footer-links li a:hover { color: var(--teal); padding-left: 5px; }
+.floating-icons { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+.floating-icons a { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-top: 10px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.wa { background: #25d366; } .top { background: var(--dark-blue); }
+
+
+
+/* --- Modern Process Section Styling --- */
+.process-section {
+    background-color: #fcfbf9; /* Halka beige/white mix */
+}
+
+.process-item {
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    z-index: 1;
+}
+
+.process-icon-box {
+    width: 90px;
+    height: 90px;
+    background: #ffffff;
+    color: var(--dark-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+    transition: 0.4s ease;
+}
+
+.process-step-num {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 30px;
+    height: 30px;
+    background: var(--teal);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(84, 197, 197, 0.4);
+}
+
+.process-item h5 {
+    font-weight: 700;
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+}
+
+/* Connecting Dashed Line */
+.process-connector {
+    position: absolute;
+    top: 45px;
+    left: 70%;
+    width: 60%;
+    border-top: 2px dashed #ddd;
+    z-index: -1;
+}
+
+/* Hover Effect */
+.process-item:hover .process-icon-box {
+    background: var(--teal);
+    color: #fff;
+    transform: translateY(-10px);
+}
+
+.process-item:hover .process-step-num {
+    background: var(--dark-blue);
+}
+
+
+
+/* --- Why Choose Us Modern Styling --- */
+.why-section {
+    background: linear-gradient(135deg, #004B6B 0%, #002d41 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glassmorphism Card Style */
+.why-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 25px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+    height: 100%;
+    backdrop-filter: blur(5px);
+}
+
+.why-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--teal);
+    color: white;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    border-radius: 15px;
+    transform: rotate(-10deg);
+    transition: 0.4s;
+    box-shadow: 0 10px 20px rgba(84, 197, 197, 0.3);
+}
+
+.why-card h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--white);
+}
+
+.why-card p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+/* Hover Effects */
+.why-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-15px);
+    border-color: var(--teal);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.why-card:hover .why-icon {
+    transform: rotate(0deg) scale(1.1);
+    background: white;
+    color: var(--teal);
+}
+
+/* Extra Background Glow for that "Acha" look */
+.why-section::after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: var(--teal);
+    filter: blur(150px);
+    opacity: 0.1;
+    z-index: 0;
+}
+
+
+/* --- ABOUT SECTION ANIMATIONS --- */
+
+.about-animated-section {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* 1. Pure CSS Scroll Reveal Animation */
+@keyframes aboutSlideIn {
+    from { opacity: 0; transform: translateY(100px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.about-reveal-wrapper {
+    view-timeline-name: --about;
+    view-timeline-axis: block;
+    animation-timeline: --about;
+    animation-name: aboutSlideIn;
+    animation-range: entry 10% cover 40%;
+    animation-fill-mode: both;
+}
+
+/* 2. Gradient Text Effect */
+.gradient-text {
+    background: linear-gradient(to right, var(--teal), var(--dark-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* 3. Colorful Image Hover Effect */
+.about-img-glow {
+    position: relative;
+    padding: 10px;
+    border-radius: 25px;
+    transition: all 0.5s ease;
+    background: transparent;
+}
+
+/* Jab user Image par hover karega tab Colorful border glow aayega */
+.about-img-glow:hover {
+    background: linear-gradient(45deg, var(--teal), #6f42c1, var(--dark-blue));
+    box-shadow: 0 20px 40px rgba(84, 197, 197, 0.4);
+    transform: scale(1.02);
+}
+
+.main-about-img {
+    border: 5px solid white;
+    transition: 0.5s ease;
+}
+
+/* 4. Feature Icons Animation */
+.feat-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--beige-bg);
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 20px;
+    transition: 0.4s;
+}
+
+.feat-item:hover .feat-icon {
+    background: var(--teal);
+    color: white;
+    transform: rotate(360deg);
+}
+
+/* 5. Colorful Tech Shapes (Floating Diagrams) */
+.tech-shape {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.1;
+    filter: blur(50px);
+    pointer-events: none;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--teal);
+    top: -100px;
+    right: -50px;
+    animation: floatShape 10s infinite alternate;
+}
+
+.shape-2 {
+    width: 250px;
+    height: 250px;
+    background: #6f42c1; /* Modern Purple accent */
+    bottom: -50px;
+    left: -50px;
+    animation: floatShape 15s infinite alternate-reverse;
+}
+
+@keyframes floatShape {
+    from { transform: translate(0, 0); }
+    to { transform: translate(50px, 50px); }
+}
+
+/* Button Styling */
+.btn-main-gradient {
+    background: linear-gradient(to right, var(--dark-blue), var(--teal));
+    color: white !important;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    transition: 0.4s;
+    box-shadow: 0 10px 20px rgba(0, 75, 107, 0.2);
+}
+
+.btn-main-gradient:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(84, 197, 197, 0.4);
+}
+
+/* --- TESTIMONIAL GSAP STYLE --- */
+
+.testimonial-gsap-section {
+    position: relative;
+    background: #fcfbf9;
+    overflow: hidden;
+}
+
+/* 1. Staggered Entrance (Like GSAP ScrollTrigger) */
+@keyframes gsapReveal {
+    from { opacity: 0; transform: translateY(60px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.reveal-item {
+    view-timeline-name: --gsap;
+    view-timeline-axis: block;
+    animation-timeline: --gsap;
+    animation-name: gsapReveal;
+    animation-range: entry 10% cover 30%;
+    animation-fill-mode: both;
+}
+
+/* 2. Animated Moving Border Light */
+.testimonial-card-modern {
+    position: relative;
+    padding: 3px; /* Border thickness */
+    background: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 100%;
+    z-index: 1;
+}
+
+.animated-border {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        transparent, 
+        transparent, 
+        transparent, 
+        var(--teal)
+    );
+    animation: borderRotate 4s linear infinite; /* Auto running border animation */
+    z-index: -1;
+}
+
+@keyframes borderRotate {
+    100% { transform: rotate(360deg); }
+}
+
+.card-inner {
+    border-radius: 18px;
+    height: 100%;
+}
+
+/* 3. Floating Tech Diagrams in Background Space */
+.space-shape {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.tech-circle-1 {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed var(--teal);
+    border-radius: 50%;
+    top: 10%;
+    left: 5%;
+    animation: rotateDiagram 20s linear infinite;
+}
+
+.tech-dots-1 {
+    width: 100px;
+    height: 100px;
+    background-image: radial-gradient(var(--dark-blue) 2px, transparent 2px);
+    background-size: 15px 15px;
+    bottom: 10%;
+    right: 5%;
+    animation: floatVertical 6s infinite alternate ease-in-out;
+}
+
+.tech-line-1 {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    top: 50%;
+    right: -50px;
+    transform: rotate(-45deg);
+}
+
+@keyframes rotateDiagram {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes floatVertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(-30px); }
+}
+
+
