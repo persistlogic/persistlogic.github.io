@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Tenant Architecture Design • PersistLogic</title>
+  <meta name="description" content="Learn how to design and implement multi-tenant SaaS architectures that scale efficiently while maintaining data isolation.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/blog.css">
+  
+  <style>
+    .blog-post-header {
+      background: linear-gradient(135deg, #0F3F3A, #1FAE9A);
+      padding: 100px 0 60px;
+      color: white;
+      margin-top: 70px;
+    }
+    
+    .blog-post-header h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .blog-post-meta {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-top: 20px;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    .blog-post-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .author-avatar-large {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    .blog-post-content {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 24px;
+      font-size: 17px;
+      line-height: 1.8;
+      color: #1E293B;
+    }
+    
+    .blog-post-content h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-top: 48px;
+      margin-bottom: 24px;
+      color: #0F3F3A;
+    }
+    
+    .blog-post-content h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      color: #1FAE9A;
+    }
+    
+    .blog-post-content p {
+      margin-bottom: 20px;
+      color: #475569;
+    }
+    
+    .blog-post-content ul, .blog-post-content ol {
+      margin: 20px 0;
+      padding-left: 30px;
+    }
+    
+    .blog-post-content li {
+      margin-bottom: 12px;
+      color: #475569;
+    }
+    
+    .blog-post-content strong {
+      color: #1E293B;
+      font-weight: 600;
+    }
+    
+    .highlight-box {
+      background: #F8FAFC;
+      border-left: 4px solid #1FAE9A;
+      padding: 24px;
+      margin: 32px 0;
+      border-radius: 8px;
+    }
+    
+    .code-block {
+      background: #1E293B;
+      color: #E2E8F0;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+    
+    .back-to-blog {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #1FAE9A;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 40px;
+      transition: all 0.3s;
+    }
+    
+    .back-to-blog:hover {
+      gap: 12px;
+      color: #0F3F3A;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light navbar-modern fixed-top" id="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="images/icons/logo.png" alt="PersistLogic" class="navbar-logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" id="hamburgerBtn">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="navbar-menu" id="navbarMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- BLOG POST HEADER -->
+<section class="blog-post-header">
+  <div class="container">
+    <a href="blog.html" class="back-to-blog" style="color: white; opacity: 0.9;">
+      <i class="fas fa-arrow-left"></i> Back to Blog
+    </a>
+    <h1>Multi-Tenant Architecture Design</h1>
+    <div class="blog-post-meta">
+      <div class="blog-post-author">
+        <div class="author-avatar-large">V</div>
+        <div>
+          <div style="font-weight: 600;">Vikash</div>
+          <div style="opacity: 0.8; font-size: 14px;">Senior Engineer • PersistLogic</div>
+        </div>
+      </div>
+      <div><i class="far fa-calendar"></i> March 20, 2024</div>
+      <div><i class="far fa-clock"></i> 10 min read</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG POST CONTENT -->
+<article class="blog-post-content">
+  
+  <p><strong>Multi-tenancy is the backbone of modern SaaS applications.</strong> It allows you to serve multiple customers (tenants) from a single application instance while keeping their data completely isolated. Done right, multi-tenancy reduces infrastructure costs and simplifies maintenance. Done wrong, it creates security nightmares and performance bottlenecks.</p>
+
+  <p>At PersistLogic, we've architected multi-tenant platforms serving hundreds of organizations. Here's our approach to building SaaS systems that scale efficiently.</p>
+
+  <h2>Understanding Multi-Tenancy</h2>
+
+  <p>In a multi-tenant architecture, multiple customers share the same application infrastructure but their data remains isolated. Think of it like an apartment building—multiple tenants share the same building infrastructure (plumbing, electricity) but each apartment is private and secure.</p>
+
+  <h3>Why Multi-Tenancy Matters</h3>
+
+  <ul>
+    <li><strong>Cost efficiency:</strong> One application instance serves hundreds or thousands of tenants</li>
+    <li><strong>Easier updates:</strong> Deploy new features to all tenants simultaneously</li>
+    <li><strong>Resource optimization:</strong> Share infrastructure costs across all tenants</li>
+    <li><strong>Simplified maintenance:</strong> Manage one codebase instead of separate instances</li>
+  </ul>
+
+  <h2>Multi-Tenancy Patterns</h2>
+
+  <h3>1. Database per Tenant</h3>
+
+  <p>Each tenant gets their own separate database. This provides the strongest data isolation but comes with operational complexity.</p>
+
+  <p><strong>Pros:</strong></p>
+  <ul>
+    <li>Complete data isolation</li>
+    <li>Easy to backup/restore individual tenants</li>
+    <li>Can scale each tenant's database independently</li>
+    <li>Simpler compliance (data residency requirements)</li>
+  </ul>
+
+  <p><strong>Cons:</strong></p>
+  <ul>
+    <li>Higher infrastructure costs</li>
+    <li>Complex connection management</li>
+    <li>Schema migrations must run on every database</li>
+    <li>Reporting across tenants is challenging</li>
+  </ul>
+
+  <h3>2. Shared Database, Separate Schemas</h3>
+
+  <p>All tenants share one database but each has their own schema (namespace). This balances isolation with efficiency.</p>
+
+  <p><strong>Pros:</strong></p>
+  <ul>
+    <li>Good data isolation</li>
+    <li>Lower infrastructure costs than database-per-tenant</li>
+    <li>Easier cross-tenant reporting</li>
+    <li>Simpler connection management</li>
+  </ul>
+
+  <p><strong>Cons:</strong></p>
+  <ul>
+    <li>Schema management complexity</li>
+    <li>Limited by database's schema limit</li>
+    <li>One tenant can still impact others (CPU/memory)</li>
+  </ul>
+
+  <h3>3. Shared Database, Shared Schema</h3>
+
+  <p>All tenants share the same database and schema. A tenant_id column identifies which tenant owns each record. This is the most cost-effective approach.</p>
+
+  <p><strong>Pros:</strong></p>
+  <ul>
+    <li>Lowest infrastructure cost</li>
+    <li>Easiest to implement</li>
+    <li>Simple schema migrations</li>
+    <li>Efficient resource utilization</li>
+  </ul>
+
+  <p><strong>Cons:</strong></p>
+  <ul>
+    <li>Weakest data isolation</li>
+    <li>Must be extremely careful with queries</li>
+    <li>One bad query can expose all tenant data</li>
+    <li>Noisy neighbor problem</li>
+  </ul>
+
+  <h2>Our Recommended Approach</h2>
+
+  <p>For most SaaS applications, we recommend <strong>shared database, shared schema</strong> with these safeguards:</p>
+
+  <h3>1. Tenant Context Middleware</h3>
+
+  <p>Every request must identify its tenant. Use middleware to extract and validate the tenant context before processing any request.</p>
+
+  <div class="code-block">
+// Example: Tenant context middleware (Node.js/Express)
+<br>app.use((req, res, next) => {
+<br>&nbsp;&nbsp;const tenantId = extractTenantId(req);
+<br>&nbsp;&nbsp;if (!tenantId) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;return res.status(400).json({ error: 'Tenant not specified' });
+<br>&nbsp;&nbsp;}
+<br>&nbsp;&nbsp;req.tenantId = tenantId;
+<br>&nbsp;&nbsp;next();
+<br>});
+  </div>
+
+  <h3>2. Database-Level Row Security</h3>
+
+  <p>Use database features like Row Level Security (RLS) in PostgreSQL to enforce tenant isolation at the database level.</p>
+
+  <h3>3. Query Builder Abstraction</h3>
+
+  <p>Never write raw SQL queries. Use an ORM or query builder that automatically adds tenant filtering to every query.</p>
+
+  <div class="highlight-box">
+    <strong>Golden Rule:</strong> Every database query must include the tenant_id filter. No exceptions.
+  </div>
+
+  <h2>Data Isolation Strategies</h2>
+
+  <h3>Tenant Identification</h3>
+
+  <p>How do you know which tenant a request belongs to? Common approaches:</p>
+
+  <ul>
+    <li><strong>Subdomain:</strong> tenant1.yourapp.com, tenant2.yourapp.com</li>
+    <li><strong>Custom domain:</strong> Each tenant uses their own domain</li>
+    <li><strong>API key:</strong> Include tenant identifier in authentication token</li>
+    <li><strong>Database lookup:</strong> Look up tenant from user's organization</li>
+  </ul>
+
+  <p>We typically use a combination: custom domains for white-labeling + API tokens for programmatic access.</p>
+
+  <h3>Background Jobs</h3>
+
+  <p>Background jobs must also respect tenant boundaries. Always include tenant_id when queuing jobs:</p>
+
+  <ul>
+    <li>Pass tenant_id as job parameter</li>
+    <li>Validate tenant exists before processing</li>
+    <li>Apply same tenant filters in background jobs</li>
+    <li>Never process data across tenant boundaries</li>
+  </ul>
+
+  <h2>Performance Optimization</h2>
+
+  <h3>Database Indexing</h3>
+
+  <p>Tenant-specific queries must be fast. Always include tenant_id in your indexes:</p>
+
+  <div class="code-block">
+-- Example: Composite index with tenant_id
+<br>CREATE INDEX idx_orders_tenant_date 
+<br>ON orders(tenant_id, created_at DESC);
+<br>
+<br>-- This makes tenant-specific queries lightning fast
+<br>SELECT * FROM orders 
+<br>WHERE tenant_id = 'tenant_123' 
+<br>ORDER BY created_at DESC;
+  </div>
+
+  <h3>Caching Strategy</h3>
+
+  <p>Cache tenant-specific data with tenant-scoped cache keys:</p>
+
+  <ul>
+    <li>Key format: <code>tenant:{tenant_id}:resource:{resource_id}</code></li>
+    <li>Implement cache invalidation per tenant</li>
+    <li>Set appropriate TTLs based on data freshness needs</li>
+    <li>Use separate cache namespaces for different tenants</li>
+  </ul>
+
+  <h3>Noisy Neighbor Problem</h3>
+
+  <p>One tenant's heavy usage shouldn't impact others. Implement these protections:</p>
+
+  <ul>
+    <li><strong>Rate limiting:</strong> Limit API requests per tenant</li>
+    <li><strong>Resource quotas:</strong> Set storage/compute limits per tenant</li>
+    <li><strong>Connection pooling:</strong> Limit database connections per tenant</li>
+    <li><strong>Queue isolation:</strong> Separate job queues for large tenants</li>
+  </ul>
+
+  <h2>Security Considerations</h2>
+
+  <h3>Data Leakage Prevention</h3>
+
+  <p>The biggest risk in multi-tenancy is data leakage between tenants. Prevent it with:</p>
+
+  <ul>
+    <li><strong>Automated testing:</strong> Test tenant isolation in every feature</li>
+    <li><strong>Code reviews:</strong> Require explicit tenant filtering in all queries</li>
+    <li><strong>Audit logging:</strong> Log all data access with tenant context</li>
+    <li><strong>Penetration testing:</strong> Specifically test tenant boundary violations</li>
+  </ul>
+
+  <h3>Authentication & Authorization</h3>
+
+  <p>Implement multi-layered security:</p>
+
+  <ol>
+    <li><strong>Tenant-level authentication:</strong> Verify the tenant exists and is active</li>
+    <li><strong>User-level authentication:</strong> Verify user credentials</li>
+    <li><strong>User-tenant relationship:</strong> Verify user belongs to the tenant</li>
+    <li><strong>Resource-level authorization:</strong> Verify user can access specific resources</li>
+  </ol>
+
+  <h2>Monitoring & Observability</h2>
+
+  <p>Track metrics per tenant to identify issues early:</p>
+
+  <ul>
+    <li>Request latency per tenant</li>
+    <li>Error rates per tenant</li>
+    <li>Database query performance per tenant</li>
+    <li>Storage usage per tenant</li>
+    <li>API usage per tenant</li>
+  </ul>
+
+  <h2>Tenant Onboarding & Provisioning</h2>
+
+  <p>Make tenant onboarding seamless:</p>
+
+  <ol>
+    <li>Create tenant record with unique identifier</li>
+    <li>Initialize default configurations</li>
+    <li>Set up tenant-specific resources (if any)</li>
+    <li>Create initial admin user</li>
+    <li>Send welcome email with setup instructions</li>
+  </ol>
+
+  <h2>Conclusion</h2>
+
+  <p>Multi-tenant architecture is essential for building successful SaaS products. The key is balancing cost efficiency with data isolation and performance.</p>
+
+  <p><strong>Our recommendations:</strong></p>
+  <ul>
+    <li>Start with shared database, shared schema for cost efficiency</li>
+    <li>Implement strong tenant isolation at the application layer</li>
+    <li>Use database-level security features (RLS) as an additional safeguard</li>
+    <li>Monitor per-tenant metrics to catch issues early</li>
+    <li>Plan for large tenant migration to dedicated resources</li>
+  </ul>
+
+  <p>At PersistLogic, we design multi-tenant architectures that scale from 10 to 10,000 tenants without compromising security or performance.</p>
+
+  <div class="highlight-box">
+    <strong>Building a SaaS platform?</strong><br>
+    <p style="margin-top: 12px; margin-bottom: 0;">Let's discuss how PersistLogic can help you design a multi-tenant architecture that scales with your business.</p>
+  </div>
+
+  <div style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #E2E8F0;">
+    <a href="blog.html" class="back-to-blog">
+      <i class="fas fa-arrow-left"></i> Back to all articles
+    </a>
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <h5>PersistLogic</h5>
+        <p>Engineering-first software company building scalable enterprise systems.</p>
+      </div>
+      
+      <div class="col-lg-2 col-md-6">
+        <h6>Quick Links</h6>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <h6>Services</h6>
+        <ul>
+          <li><a href="services.html">Enterprise Software</a></li>
+          <li><a href="services.html">SaaS Development</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <h6>Contact</h6>
+        <p><i class="fas fa-map-marker-alt"></i> New Vishal Nagar, Rohtak, Haryana</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 PersistLogic. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
