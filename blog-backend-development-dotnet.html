@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backend Development with .NET Core • PersistLogic</title>
+  <meta name="description" content="Learn best practices for building robust backend systems using .NET Core and modern development patterns.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/blog.css">
+  
+  <style>
+    .blog-post-header {
+      background: linear-gradient(135deg, #0F3F3A, #1FAE9A);
+      padding: 100px 0 60px;
+      color: white;
+      margin-top: 70px;
+    }
+    .blog-post-header h1 { font-size: 42px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
+    .blog-post-meta { display: flex; align-items: center; gap: 30px; margin-top: 20px; font-size: 16px; opacity: 0.9; }
+    .blog-post-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar-large { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 18px; }
+    .blog-post-content { max-width: 800px; margin: 60px auto; padding: 0 24px; font-size: 17px; line-height: 1.8; color: #1E293B; }
+    .blog-post-content h2 { font-size: 32px; font-weight: 700; margin-top: 48px; margin-bottom: 24px; color: #0F3F3A; }
+    .blog-post-content h3 { font-size: 24px; font-weight: 600; margin-top: 36px; margin-bottom: 16px; color: #1FAE9A; }
+    .blog-post-content p { margin-bottom: 20px; color: #475569; }
+    .blog-post-content ul, .blog-post-content ol { margin: 20px 0; padding-left: 30px; }
+    .blog-post-content li { margin-bottom: 12px; color: #475569; }
+    .blog-post-content strong { color: #1E293B; font-weight: 600; }
+    .highlight-box { background: #F8FAFC; border-left: 4px solid #1FAE9A; padding: 24px; margin: 32px 0; border-radius: 8px; }
+    .code-block { background: #1E293B; color: #E2E8F0; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 14px; overflow-x: auto; margin: 24px 0; }
+    .back-to-blog { display: inline-flex; align-items: center; gap: 8px; color: #1FAE9A; text-decoration: none; font-weight: 600; margin-bottom: 40px; transition: all 0.3s; }
+    .back-to-blog:hover { gap: 12px; color: #0F3F3A; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-modern fixed-top" id="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="images/icons/logo.png" alt="PersistLogic" class="navbar-logo">
+    </a>
+    <button class="navbar-toggler" type="button" id="hamburgerBtn">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-menu" id="navbarMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="blog-post-header">
+  <div class="container">
+    <a href="blog.html" class="back-to-blog" style="color: white; opacity: 0.9;">
+      <i class="fas fa-arrow-left"></i> Back to Blog
+    </a>
+    <h1>Backend Development with .NET Core</h1>
+    <div class="blog-post-meta">
+      <div class="blog-post-author">
+        <div class="author-avatar-large">NS</div>
+        <div>
+          <div style="font-weight: 600;">Niranjan Singh</div>
+          <div style="opacity: 0.8; font-size: 14px;">Software Engineer • PersistLogic</div>
+        </div>
+      </div>
+      <div><i class="far fa-calendar"></i> March 22, 2024</div>
+      <div><i class="far fa-clock"></i> 9 min read</div>
+    </div>
+  </div>
+</section>
+
+<article class="blog-post-content">
+  
+  <p><strong>.NET Core has evolved into one of the most powerful platforms for building enterprise-grade backend systems.</strong> Its cross-platform capabilities, performance optimizations, and rich ecosystem make it ideal for modern server-side development.</p>
+
+  <p>At PersistLogic, we build most of our backend systems using .NET Core. Here's our approach to building robust, maintainable server-side applications.</p>
+
+  <h2>Why .NET Core for Backend Development</h2>
+
+  <p>.NET Core offers several advantages for backend development:</p>
+
+  <ul>
+    <li><strong>Cross-platform:</strong> Run on Windows, Linux, or macOS</li>
+    <li><strong>High performance:</strong> One of the fastest web frameworks available</li>
+    <li><strong>Strong typing:</strong> Catch errors at compile time, not runtime</li>
+    <li><strong>Rich ecosystem:</strong> Mature libraries and tools</li>
+    <li><strong>Built-in dependency injection:</strong> Clean architecture out of the box</li>
+    <li><strong>Entity Framework Core:</strong> Powerful ORM for database operations</li>
+  </ul>
+
+  <h2>Project Structure Best Practices</h2>
+
+  <p>A well-organized project structure is crucial for maintainability. We use Clean Architecture principles:</p>
+
+  <div class="code-block">
+YourProject/
+<br>├── API/                    # Web API layer
+<br>│   ├── Controllers/
+<br>│   ├── Middleware/
+<br>│   └── Program.cs
+<br>├── Application/            # Business logic
+<br>│   ├── Services/
+<br>│   ├── Interfaces/
+<br>│   └── DTOs/
+<br>├── Domain/                 # Domain entities
+<br>│   ├── Entities/
+<br>│   └── ValueObjects/
+<br>└── Infrastructure/         # Data access
+<br>    ├── Repositories/
+<br>    └── Data/
+  </div>
+
+  <h3>Benefits of This Structure</h3>
+
+  <ul>
+    <li>Clear separation of concerns</li>
+    <li>Easy to test individual layers</li>
+    <li>Business logic independent of frameworks</li>
+    <li>Easy to swap out infrastructure components</li>
+  </ul>
+
+  <h2>API Design Principles</h2>
+
+  <h3>RESTful Endpoints</h3>
+
+  <p>Design APIs that are intuitive and follow REST conventions:</p>
+
+  <ul>
+    <li><code>GET /api/users</code> - List all users</li>
+    <li><code>GET /api/users/{id}</code> - Get specific user</li>
+    <li><code>POST /api/users</code> - Create new user</li>
+    <li><code>PUT /api/users/{id}</code> - Update user</li>
+    <li><code>DELETE /api/users/{id}</code> - Delete user</li>
+  </ul>
+
+  <h3>Consistent Response Format</h3>
+
+  <p>Return consistent response structures across all endpoints:</p>
+
+  <div class="code-block">
+public class ApiResponse&lt;T&gt;
+<br>{
+<br>&nbsp;&nbsp;public bool Success { get; set; }
+<br>&nbsp;&nbsp;public string Message { get; set; }
+<br>&nbsp;&nbsp;public T Data { get; set; }
+<br>&nbsp;&nbsp;public List&lt;string&gt; Errors { get; set; }
+<br>}
+  </div>
+
+  <h2>Database Access with Entity Framework Core</h2>
+
+  <h3>DbContext Configuration</h3>
+
+  <p>Keep your DbContext clean and focused:</p>
+
+  <div class="code-block">
+public class ApplicationDbContext : DbContext
+<br>{
+<br>&nbsp;&nbsp;public DbSet&lt;User&gt; Users { get; set; }
+<br>&nbsp;&nbsp;public DbSet&lt;Order&gt; Orders { get; set; }
+<br>
+<br>&nbsp;&nbsp;protected override void OnModelCreating(ModelBuilder builder)
+<br>&nbsp;&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+<br>&nbsp;&nbsp;}
+<br>}
+  </div>
+
+  <h3>Repository Pattern</h3>
+
+  <p>Abstract database operations behind repositories for better testability:</p>
+
+  <div class="code-block">
+public interface IRepository&lt;T&gt; where T : class
+<br>{
+<br>&nbsp;&nbsp;Task&lt;T&gt; GetByIdAsync(int id);
+<br>&nbsp;&nbsp;Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync();
+<br>&nbsp;&nbsp;Task AddAsync(T entity);
+<br>&nbsp;&nbsp;Task UpdateAsync(T entity);
+<br>&nbsp;&nbsp;Task DeleteAsync(int id);
+<br>}
+  </div>
+
+  <h2>Authentication & Authorization</h2>
+
+  <h3>JWT Authentication</h3>
+
+  <p>Implement token-based authentication for stateless APIs:</p>
+
+  <ul>
+    <li>Generate JWT tokens on successful login</li>
+    <li>Include user claims in token</li>
+    <li>Validate tokens on protected endpoints</li>
+    <li>Implement token refresh mechanism</li>
+  </ul>
+
+  <div class="highlight-box">
+    <strong>Security Best Practice:</strong> Store JWT secrets in environment variables, never in code. Use strong secret keys (at least 256 bits).
+  </div>
+
+  <h3>Role-Based Authorization</h3>
+
+  <p>Use built-in authorization attributes for role-based access:</p>
+
+  <div class="code-block">
+[Authorize(Roles = "Admin")]
+<br>[HttpDelete("api/users/{id}")]
+<br>public async Task&lt;IActionResult&gt; DeleteUser(int id)
+<br>{
+<br>&nbsp;&nbsp;// Only admins can delete users
+<br>}
+  </div>
+
+  <h2>Error Handling & Logging</h2>
+
+  <h3>Global Exception Handling</h3>
+
+  <p>Implement middleware to catch and handle all exceptions:</p>
+
+  <div class="code-block">
+public class ExceptionMiddleware
+<br>{
+<br>&nbsp;&nbsp;public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+<br>&nbsp;&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;try
+<br>&nbsp;&nbsp;&nbsp;&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await next(context);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>&nbsp;&nbsp;&nbsp;&nbsp;catch (Exception ex)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await HandleExceptionAsync(context, ex);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>&nbsp;&nbsp;}
+<br>}
+  </div>
+
+  <h3>Structured Logging</h3>
+
+  <p>Use Serilog for structured logging:</p>
+
+  <ul>
+    <li>Log request/response details</li>
+    <li>Track performance metrics</li>
+    <li>Log business operations</li>
+    <li>Store logs in centralized location</li>
+  </ul>
+
+  <h2>Performance Optimization</h2>
+
+  <h3>Async/Await Everywhere</h3>
+
+  <p>Always use async operations for I/O-bound tasks:</p>
+
+  <ul>
+    <li>Database queries</li>
+    <li>File operations</li>
+    <li>HTTP requests</li>
+    <li>External API calls</li>
+  </ul>
+
+  <h3>Response Caching</h3>
+
+  <p>Cache responses for frequently accessed, rarely changing data:</p>
+
+  <div class="code-block">
+[ResponseCache(Duration = 300)]
+<br>[HttpGet("api/products")]
+<br>public async Task&lt;IActionResult&gt; GetProducts()
+<br>{
+<br>&nbsp;&nbsp;// Cached for 5 minutes
+<br>}
+  </div>
+
+  <h3>Database Query Optimization</h3>
+
+  <ul>
+    <li>Use <code>AsNoTracking()</code> for read-only queries</li>
+    <li>Implement pagination for large datasets</li>
+    <li>Use projection to select only needed columns</li>
+    <li>Avoid N+1 query problems with eager loading</li>
+  </ul>
+
+  <h2>Dependency Injection Best Practices</h2>
+
+  <p>Register services with appropriate lifetimes:</p>
+
+  <ul>
+    <li><strong>Transient:</strong> Created each time requested (lightweight services)</li>
+    <li><strong>Scoped:</strong> Created once per request (DbContext, repositories)</li>
+    <li><strong>Singleton:</strong> Created once for application lifetime (configuration, caches)</li>
+  </ul>
+
+  <div class="code-block">
+builder.Services.AddScoped&lt;IUserRepository, UserRepository&gt;();
+<br>builder.Services.AddTransient&lt;IEmailService, EmailService&gt;();
+<br>builder.Services.AddSingleton&lt;ICacheService, CacheService&gt;();
+  </div>
+
+  <h2>API Documentation with Swagger</h2>
+
+  <p>Always document your APIs using Swagger/OpenAPI:</p>
+
+  <ul>
+    <li>Auto-generate API documentation</li>
+    <li>Provide interactive testing interface</li>
+    <li>Include request/response examples</li>
+    <li>Document authentication requirements</li>
+  </ul>
+
+  <h2>Testing Strategy</h2>
+
+  <h3>Unit Tests</h3>
+
+  <p>Test business logic in isolation using xUnit and Moq:</p>
+
+  <ul>
+    <li>Test service methods</li>
+    <li>Mock dependencies</li>
+    <li>Test edge cases</li>
+    <li>Aim for 80%+ code coverage</li>
+  </ul>
+
+  <h3>Integration Tests</h3>
+
+  <p>Test API endpoints with in-memory database:</p>
+
+  <ul>
+    <li>Test complete request/response flow</li>
+    <li>Verify authentication/authorization</li>
+    <li>Test database operations</li>
+    <li>Use WebApplicationFactory</li>
+  </ul>
+
+  <h2>Configuration Management</h2>
+
+  <p>Use configuration providers for different environments:</p>
+
+  <ul>
+    <li><code>appsettings.json</code> - Default settings</li>
+    <li><code>appsettings.Development.json</code> - Dev overrides</li>
+    <li><code>appsettings.Production.json</code> - Prod settings</li>
+    <li>Environment variables - Secrets and connection strings</li>
+  </ul>
+
+  <div class="highlight-box">
+    <strong>Security Note:</strong> Never commit secrets to source control. Use Azure Key Vault, AWS Secrets Manager, or similar for production secrets.
+  </div>
+
+  <h2>Conclusion</h2>
+
+  <p>.NET Core provides a solid foundation for building enterprise backend systems. Key takeaways:</p>
+
+  <ul>
+    <li>Use Clean Architecture for maintainability</li>
+    <li>Follow RESTful API design principles</li>
+    <li>Implement proper authentication and authorization</li>
+    <li>Use async/await for all I/O operations</li>
+    <li>Write comprehensive tests</li>
+    <li>Document APIs with Swagger</li>
+    <li>Monitor performance and errors</li>
+  </ul>
+
+  <p>At PersistLogic, these practices help us build backend systems that are performant, secure, and maintainable for years.</p>
+
+  <div class="highlight-box">
+    <strong>Need backend development expertise?</strong><br>
+    <p style="margin-top: 12px; margin-bottom: 0;">Contact PersistLogic to discuss how we can build robust backend systems for your business.</p>
+  </div>
+
+  <div style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #E2E8F0;">
+    <a href="blog.html" class="back-to-blog">
+      <i class="fas fa-arrow-left"></i> Back to all articles
+    </a>
+  </div>
+
+</article>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <h5>PersistLogic</h5>
+        <p>Engineering-first software company building scalable enterprise systems.</p>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>Contact</h6>
+        <p><i class="fas fa-map-marker-alt"></i> New Vishal Nagar, Rohtak, Haryana</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 PersistLogic. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
